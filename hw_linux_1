@@ -1,0 +1,36 @@
+1. Создать репозиторий в GitHub.
+	+
+
+2. Установить Virtualbox, установить Ubuntu.
+	+
+
+3. Установить утилиты для гостевой ОС вручную и написать команды для:
+	-- монтирование оптического диска с guest additions
+		$ sudo mkdir /media/serg/additions
+		$ sudo mount /dev/sr0 /media/serg/additions
+
+	-- запуска установки virtualbox гостевых дополнений
+		$ sudo /media/serg/additions/autorun.sh
+
+	-- установка недостающих зависимостей gcc make perl
+		$ sudo apt-get update
+		$ sudo apt install gcc make perl
+
+4. В конфигурации виртуальной машины включить "общий буфер". Заменить NAT сетевой интерфейс на Bridged (либо на Windows добавить еще один internal интерфейс)
+	+
+
+5. Настроить ssh соединение с хостовой ОС на гостевую ОС с использованием ssh ключа и написать команды для:
+	-- установки ssh сервер
+		$ sudo apt-get install openssh-server
+
+	-- открытие справки для команды ufw
+		$ man ufw
+
+	-- включение службы ssh сервера
+		$ sudo systemctl start
+
+	-- добавления порта 22 в исключения фаервола
+		$ sudo ufw allow 22
+
+	-- генерации ssh ключа
+		$ ssh-keygen
