@@ -1,0 +1,34 @@
+1. Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жесткую ссылку file4 на file1. Посмотреть, какие айноды у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+
+	~/Documents$ cat > file1			// Ввести данные + Ctrl^D
+	~/Documents$ cat file1 > file2
+	~/Documents$ ln -s file1 file3
+	~/Documents$ ln file1 file4
+	~/Documents$ ls -ila
+	~/Documents$ rm file1				// Файлы остались
+	~/Documents$ cat ./*				// file2, file4 выводятся, для file3: "cat: ./file3: No such file or directory"
+
+2. Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+
+	~/Documents$ mv file2 file2_ren
+	~/Documents$ mv file3 file3_ren
+	~/Documents$ mv file4 file4_ren
+	~/Documents$ ln -s file2_ren  file5
+	~/Documents$ mkdir test
+	~/Documents$ mv file3_ren ./test
+	~/Documents$ mv file5 ./test
+
+3. Создать два произвольных файла. Первому присвоить права на чтение, запись для владельца и группы, только на чтение для всех. Второму присвоить права на чтение, запись только для владельца. Сделать это в численном и символьном виде.
+
+	~/Documents$ echo text1 > f_1
+	~/Documents$ echo text2 > f_2
+	~/Documents$ chmod ug=rw,o=r f_1
+	~/Documents$ chmod 664 f_1
+	~/Documents$ chmod u=rw,go-rw  f_2
+	~/Documents$ chmod 600 f_2
+
+4. Создать пользователя, обладающего возможностью выполнять действия от имени суперпользователя.
+
+	$ sudo useradd -G sudo -p NSUpassword new_sudo_user
+
+
